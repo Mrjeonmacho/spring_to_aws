@@ -1,6 +1,6 @@
 package com.jojoldu.admin.web;
 
-import com.jojoldu.admin.web.dto.HelloResponseDto;
+import com.jojoldu.admin.web.responsedto.HelloResponseDto;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,4 +1,4 @@
-package com.jojoldu.admin.web.dto;
+package com.jojoldu.admin.web.responsedto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

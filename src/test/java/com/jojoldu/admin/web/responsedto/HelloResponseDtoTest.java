@@ -1,9 +1,6 @@
-package com.jojoldu.admin.web.dto;
+package com.jojoldu.admin.web.responsedto;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class HelloResponseDtoTest {
 
