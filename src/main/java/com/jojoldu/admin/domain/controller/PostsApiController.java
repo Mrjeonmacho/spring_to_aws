@@ -1,11 +1,10 @@
-package com.jojoldu.admin.web;
+package com.jojoldu.admin.domain.controller;
 
 import com.jojoldu.admin.domain.entity.Posts;
 import com.jojoldu.admin.service.PostsService;
 import com.jojoldu.admin.web.requestdto.PostsSaveRequestDto;
 import com.jojoldu.admin.web.requestdto.PostsUpdateRequestDto;
 import com.jojoldu.admin.web.responsedto.PostsResponseDto;
-import com.jojoldu.admin.web.responsedto.PostsSaveResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +21,10 @@ public class PostsApiController {
      * 게시글 생성
      */
     @PostMapping
-    public ResponseEntity<PostsSaveResponseDto> save(@RequestBody PostsSaveRequestDto requestDto) {
+    public ResponseEntity<PostsResponseDto> save(@RequestBody PostsSaveRequestDto requestDto) {
         Posts savedPost = postsService.save(requestDto);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(PostsSaveResponseDto.from(savedPost));
+                .body(PostsResponseDto.from(savedPost));
     }
 
     /**

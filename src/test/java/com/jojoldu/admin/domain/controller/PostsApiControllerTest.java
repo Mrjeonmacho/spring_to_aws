@@ -1,4 +1,4 @@
-package com.jojoldu.admin.web;
+package com.jojoldu.admin.domain.controller;
 
 import com.jojoldu.admin.domain.entity.Posts;
 import com.jojoldu.admin.domain.repository.PostsRepository;
