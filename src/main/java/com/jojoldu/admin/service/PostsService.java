@@ -4,9 +4,13 @@
     import com.jojoldu.admin.domain.repository.PostsRepository;
     import com.jojoldu.admin.web.requestdto.PostsSaveRequestDto;
     import com.jojoldu.admin.web.requestdto.PostsUpdateRequestDto;
+    import com.jojoldu.admin.web.responsedto.PostsResponseDto;
     import jakarta.transaction.Transactional;
     import lombok.RequiredArgsConstructor;
     import org.springframework.stereotype.Service;
+
+    import java.util.List;
+    import java.util.stream.Collectors;
 
     @RequiredArgsConstructor
     @Service
@@ -18,6 +22,12 @@
             Posts posts = postsRepository.findById(id)
                     .orElseThrow( () -> new IllegalArgumentException("Posts with id: " + id + " not found!") );
             return posts;
+        }
+        @Transactional
+        public List<PostsResponseDto> findAllDesc(){
+            return postsRepository.findAllPosts().stream()
+                    .map(PostsResponseDto::from)
+                    .collect(Collectors.toList());
         }
 
         @Transactional
