@@ -1,0 +1,47 @@
+[33mcommit 708b1361b344e884d85a05a4e7210aa2bbf20c89[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: mrjeonmacho <wjscltn1234@naver.com>
+Date:   Tue Aug 12 20:31:04 2025 +0900
+
+    "로그인 기능 구현중(구글 이용)"
+
+[33mcommit dc9e8c9243b824dc6b3efbeb2d4377a7bd6f760d[m
+Author: mrjeonmacho <wjscltn1234@naver.com>
+Date:   Tue Aug 12 20:28:43 2025 +0900
+
+    "로그인 기능 구현중(구글 이용)"
+
+[33mcommit d6e8c9e79459b22e2e507259a8ffb61c13cfa338[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: mrjeonmacho <wjscltn1234@naver.com>
+Date:   Tue Aug 5 20:59:24 2025 +0900
+
+    "글 등록, 기본 페이지에서 등록된 글 전체 조회 화면으로 출력 완료"
+
+[33mcommit 872e67d520add250052df6756a50f3b92201aea4[m
+Author: wjsrlwjd <wjsrlwjd@kookmin.ac.kr>
+Date:   Mon Aug 4 17:58:44 2025 +0900
+
+    "controller테스트 완료, 뷰리졸버 제작중"
+
+[33mcommit ee760d139df9887b94184b3c001b8223176a2f9c[m
+Author: mrjeonmacho <wjscltn1234@naver.com>
+Date:   Fri Aug 1 20:54:50 2025 +0900
+
+    "조회, 생성, 업데이트 서비스 로직, 컨트롤러 구현 but 테스트는 해봐야함"
+
+[33mcommit 6b54602dd2389fde14e9912bdac487b5e8138443[m
+Author: wjsrlwjd <wjsrlwjd@kookmin.ac.kr>
+Date:   Fri Aug 1 17:31:19 2025 +0900
+
+    "PostsApiController 테스트 완료"
+
+[33mcommit aff583c60af4d42abe624eeb35d232930ce0c4d0[m
+Author: 전기정 <wjsrlwjd@kookmin.ac.kr>
+Date:   Thu Jul 31 16:37:39 2025 +0900
+
+    CRUD 제작 전 세팅 확인
+
+[33mcommit 91bb98fecf71b0a99c3d1abf9f8596eb9016cadb[m
+Author: Jeon3625 <wjscltn1234@naver.com>
+Date:   Mon Jun 23 16:29:32 2025 +0900
+
+    first commit
