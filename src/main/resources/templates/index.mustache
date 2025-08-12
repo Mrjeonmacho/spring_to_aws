@@ -33,7 +33,7 @@
         {{#posts}}
             <tr>
                 <td>{{id}}</td>
-                <td>{{title}}</td>
+                <td><a href="/posts/update/{{id}}">{{title}}</a> </td>
                 <td>{{author}}</td>
                 <td>{{modifiedDate}}</td>
             </tr>
@@ -42,3 +42,5 @@
     </table>
 </div>
 {{>layout/footer}}
+
+

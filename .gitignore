@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# 구글 Oauth에 인증 패스워드가 저장되어있는데, 이는 올라가면 안되니까
+# 하지만 나는 혼자 하니까 추가하지만 따로 표시하는 파일은 만들어 줄것이다 .
+application-oauth.properties

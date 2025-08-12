@@ -45,4 +45,10 @@ public class PostsApiController {
         Posts updatedPost = postsService.update(id, requestDto);
         return ResponseEntity.ok(PostsResponseDto.from(updatedPost));
     }
+
+    @DeleteMapping("/{id}")
+    public Long delete(@PathVariable Long id) {
+        postsService.delete(id);
+        return id;
+    }
 }

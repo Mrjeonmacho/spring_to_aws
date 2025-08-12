@@ -31,6 +31,15 @@
         }
 
         @Transactional
+        public void delete(Long id) {
+            Posts posts = postsRepository.findById(id)
+                            .orElseThrow( () -> new IllegalArgumentException("Posts with id: " + id + " not found!") );
+            postsRepository.delete(posts);
+            // JpaRepository에서 delete메소를 지원해서 바로 써도 된다.
+            // 엔티티를 삭제해도 되고 deleteById로 삭제할수 있다.
+        }
+
+        @Transactional
         public Posts save(PostsSaveRequestDto requestDto) {  // Long 대신 Posts 반환
             return postsRepository.save(requestDto.toEntity());
         }
