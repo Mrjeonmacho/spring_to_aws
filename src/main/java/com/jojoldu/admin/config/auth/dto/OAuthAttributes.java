@@ -40,7 +40,7 @@ public class OAuthAttributes {
                 .name(name)
                 .email(email)
                 .picture(picture)
-                .role(Role.GUEST)
+                .role(Role.GUEST) // 원래는 Role.GUEST로 만들어줘서 최초 로그인 할때는 권한이 없어야한다. 하지만 테스트를 위해 접속하는 놈 모두 관리자 모드로
                 .build();
     }
 }

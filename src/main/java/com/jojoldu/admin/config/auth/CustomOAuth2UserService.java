@@ -2,6 +2,7 @@ package com.jojoldu.admin.config.auth;
 
 
 import com.jojoldu.admin.config.auth.dto.OAuthAttributes;
+import com.jojoldu.admin.config.auth.dto.SessionUser;
 import com.jojoldu.admin.domain.repository.UserRepository;
 import com.jojoldu.admin.domain.user.User;
 import jakarta.servlet.http.HttpSession;
@@ -29,14 +30,21 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
 
-        String registrationId = userRequest.getClientRegistration().getRegistrationId();
-        String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails()
-                .getUserInfoEndpoint().getUserNameAttributeName();
+        String registrationId = userRequest.getClientRegistration()
+                .getRegistrationId();
+        String userNameAttributeName = userRequest.getClientRegistration()
+                .getProviderDetails()
+                .getUserInfoEndpoint()
+                .getUserNameAttributeName();
 
-        OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttribute());
+        OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
         User user = saveOrUpdate(attributes);
         httpSession.setAttribute("user", new SessionUser(user));
+
+        //디버깅 로그
+        System.out.println("User role: " + user.getRole());
+        System.out.println("User roleKey: " + user.getRoleKey());
 
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),

@@ -1,58 +1,41 @@
 package com.jojoldu.admin.config.auth;
 
+import com.jojoldu.admin.domain.user.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
-import com.jojoldu.admin.domain.user.Role;
-//import lombok.RequiredArgsConstructor;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
-//
-//@RequiredArgsConstructor
-//@EnableWebSecurity
-//public class SecurityConfig extends WebSecurityConfigurerAdapter{
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.csrf().disable().headers().frameOptions().disable()
-//                .and()
-//                .authorizeRequests()
-//                .antMatchers("/", "/css/**", "/images/**",
-//                        "/js/**", "/h2-console/**").permitAll()
-//                .antMatchers("/api/v1/**").hasRole(Role.USER.name())
-//                .anyRequest().authenticated()
-//                .and().logout().logoutSuccessUrl("/")
-//                .and().oauth2Login().userInfoEndpoint().userService(customOAuth2UserService);
-//    }
-//}
+@Configuration
 @RequiredArgsConstructor
-@EnableWebSecurity
 public class SecurityConfig {
 
     private final CustomOAuth2UserService customOAuth2UserService;
 
+    @SuppressWarnings("removal")    // frameOptions removal 경고 제거
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http
-                .csrf().disable()
-                .headers().frameOptions().disable()
-                .and()
+                .csrf(csrf -> csrf
+                        // h2 console 정상동작을 위해(POST) 경로에 CSRF 비활성화, 실무에서는 보안을 위해 차단필요
+                        .ignoringRequestMatchers("/**"))
+                .headers(headers -> headers
+                        .frameOptions().disable())  // h2 console 사용하기 위해 차단안함. 실무에서는 보안을 위해 차단필요
                 .authorizeHttpRequests(auth -> auth
-                        .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**").permitAll()
-                        .antMatchers("/api/v1/**").hasRole(Role.USER.name())
-                        .anyRequest().authenticated()
-                )
+                        .requestMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile", "/api/**")
+                        .permitAll()
+                        .requestMatchers("/api/v1/**").hasRole(Role.USER.name())    // USER 권한 가능
+                        .anyRequest().authenticated())
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/")
-                )
-                .oauth2Login(oauth2 -> oauth2
-                        .userInfoEndpoint(userInfo -> userInfo
-                                .userService(customOAuth2UserService)
-                        )
-                );
+                        .logoutSuccessUrl("/")          // 로그아웃 후 리다이렉션 url 설정
+                        .invalidateHttpSession(true)    // 세션 무효화
+                        .deleteCookies("JSESSIONID"))
+                .oauth2Login(oauth -> oauth             // OAuth 로그인 기능에 대한 설정 진입
+                        .userInfoEndpoint(userInfo -> userInfo  // Access Token을 이용해 사용자 정보 요청
+                                .userService(customOAuth2UserService)));    // 사용자 데이터 처리
 
         return http.build();
     }
