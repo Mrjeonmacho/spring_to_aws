@@ -25,9 +25,10 @@ public class SecurityConfig {
                 .headers(headers -> headers
                         .frameOptions().disable())  // h2 console 사용하기 위해 차단안함. 실무에서는 보안을 위해 차단필요
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile", "/api/**")
+                        .requestMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile")
                         .permitAll()
-                        .requestMatchers("/api/v1/**").hasRole(Role.USER.name())    // USER 권한 가능
+                        .requestMatchers("/api/v1/**").hasRole(Role.USER.name()) // USER 권한 가능
+                        .requestMatchers("/api/**").permitAll()
                         .anyRequest().authenticated())
                 .logout(logout -> logout
                         .logoutSuccessUrl("/")          // 로그아웃 후 리다이렉션 url 설정
